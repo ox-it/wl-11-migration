@@ -5,6 +5,8 @@
 # You need to have setup authentication for Jira in ~/.netrc
 
 base_sha=972dd811179d271ae3ba5e25a1e35a680091252b
+sakai_11=~/Documents/oxford/11/checkout/
+submodule=access
 
 git rev-list HEAD ^${base_sha} --reverse | while read sha
 do
@@ -24,10 +26,10 @@ do
 	       Yes )
 			 author=$(git  show -s --format='%an <%ae>' $sha)
 			 msg=$(git  show -s --format='%B' $sha)
-			 git diff $sha^! | (cd ~/Documents/oxford/11/checkout/ ; git apply --directory=access --reject  - )
+			 git diff $sha^! | (cd $sakai_11 ; git apply --directory=$submodule --reject  - )
 			# This is so that we have the commit and can just append to it.
-			(cd ~/Documents/oxford/11/checkout/ ; git commit --allow-empty -m "$msg" --author "$author" )
-			 echo Applied
+			(cd $sakai_11 ; git commit --allow-empty -m "$msg" --author "$author" )
+			 echo Applied. Do you want to apply the patch again
 			 continue;;
 	       No ) break;;
 	   esac
