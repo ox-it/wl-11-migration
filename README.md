@@ -7,6 +7,8 @@ ln -f git-switch ~/bin/git-switch
 ln -f re-apply.sh ~/bin/re-apply.sh 
 ```
 
+To use the `re-apply.sh` script you need to edit the parameters at the top to configure it correctly.
+
 ## Scripts
 
  - `git-switch` - Just sets up a mirror remote
