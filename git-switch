@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Switch the remote for out git repositories
+remotes=$(git remote -v show | sed 's/(.*)$//' | sort | uniq)
+repo=$(echo "$remotes" | grep '^origin' | sed 's/^.*\///;s/^wl-//')
+echo $repo
+
+if [ "$1" == "oxford" ] ; then
+    git remote remove mirror
+    git remote rename origin mirror
+    git remote add origin git@github.com:ox-it/wl-${repo}
+elif [ "$1" == "sakai" ] ; then
+    git remote rename origin oxit
+    git remote add origin git@github.com:sakai-mirror/${repo}
+elif [ "$1" == "mirror" ] ; then
+    git remote remove mirror >/dev/null 2>&1
+    git remote add mirror git@github.com:sakai-mirror/${repo}
+else
+    echo "Usage $(basename $0) (oxford|sakai)"
+    exit 1
+fi
