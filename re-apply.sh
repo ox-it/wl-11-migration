@@ -4,9 +4,9 @@
 # Script is written for bash specifically
 # You need to have setup authentication for Jira in ~/.netrc
 
-base_sha=972dd811179d271ae3ba5e25a1e35a680091252b
-sakai_11=~/Documents/oxford/11/checkout/
-submodule=access
+base_sha=$1
+sakai_11=$2
+submodule=$(basename `pwd`)
 
 git rev-list HEAD ^${base_sha} --reverse | while read sha
 do
